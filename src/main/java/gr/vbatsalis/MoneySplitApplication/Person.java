@@ -1,5 +1,6 @@
 package gr.vbatsalis.MoneySplitApplication;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +11,21 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
+@Entity
+@Table(name = "person")
 public class Person {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private int id;
+
+    @Column(name = "full_name")
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_person")
     private List<Payment> paymentList = new ArrayList<>();
     int sum = 0;
 
@@ -36,15 +50,16 @@ public class Person {
         this.paymentList.add(paymentList);
     }
 
-    public int getSum(){
+    public int getSum() {
 
-        for(var iteration: paymentList){
+        for (var iteration : paymentList) {
             sum += iteration.getValue();
         }
         return sum;
     }
-    public int getSplited(){
-        return sum/2;
+
+    public int getSplited() {
+        return sum / 2;
     }
 
     @Override

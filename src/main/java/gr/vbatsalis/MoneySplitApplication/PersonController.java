@@ -1,5 +1,6 @@
 package gr.vbatsalis.MoneySplitApplication;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,11 +11,24 @@ class PersonController {
 
     Person person = new Person();
 
+    final
+    PersonService personService;
+
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
+
+    @PostMapping("newRegistration")
+    public int  newRegistration(@RequestBody Person person){
+        return personService.saveOrUpdate(person);
+    }
+
     @PostMapping("post")
     public ResponseEntity<?> postHandler(@RequestBody Payment payment){
         person.setName("vag");
         person.setPaymentList(payment);
         System.out.println(person);
+
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @GetMapping("sum")
