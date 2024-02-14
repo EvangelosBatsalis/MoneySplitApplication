@@ -1,39 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="styles/index.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add and Fetch Data</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .form-group, .data-list {
-            margin-bottom: 10px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input[type="text"], input[type="number"], .data-list {
-            width: 100%;
-            padding: 8px;
-            margin: 4px 0;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            margin: 10px 0;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
 </head>
 <body>
 <h2>Add Data Form</h2>
@@ -51,131 +22,6 @@
 <button id="fetchData">Fetch Data</button>
 <div class="data-list" id="dataList"></div>
 
-<script>
-    document.getElementById('addDataForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const formData = {
-            desc: document.getElementById('desc').value,
-            value: document.getElementById('value').value
-        };
-
-        fetch('http://localhost:8080/api/post', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Success:', data);
-                alert('Data posted successfully!');
-                document.getElementById('addDataForm').reset(); // Reset form after submission
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Error posting data');
-            });
-    });
-
-    // document.getElementById('fetchData').addEventListener('click', function() {
-    //     fetch('http://localhost:8080/api/get')
-    //         .then(response => {
-    //             if (!response.ok) {
-    //                 throw new Error('Network response was not ok');
-    //             }
-    //             return response.json();
-    //         })
-    //         .then(data => {
-    //             const dataList = document.getElementById('dataList');
-    //             dataList.innerHTML = '<ul>' + data.map(item => `<li>${item.desc} - ${item.value}</li>`).join('') + '</ul>';
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error:', error);
-    //             alert('Error fetching data');
-    //         });
-    // });
-    // document.getElementById('fetchData').addEventListener('click', function() {
-    //     fetch('http://localhost:8080/api/get') // Adjusted to include 'api'
-    //         .then(response => {
-    //             if (!response.ok) {
-    //                 throw new Error('Network response was not ok');
-    //             }
-    //             return response.json();
-    //         })
-    //         .then(person => {
-    //             const dataList = document.getElementById('dataList');
-    //             // Ensure the person object and the paymentList are valid
-    //             if (person && person.paymentList && Array.isArray(person.paymentList)) {
-    //                 let content = `<h3>Payments for ${person.name}</h3>`;
-    //                 content += '<ul>';
-    //                 person.paymentList.forEach(payment => {
-    //                     content += `<li>Description: ${payment.desc}, Value: ${payment.value}</li>`;
-    //                 });
-    //                 content += '</ul>';
-    //                 content += `<p>Total Sum: ${person.sum}</p>`;
-    //                 dataList.innerHTML = content;
-    //                 // content += '</ul>';
-    //                 // content += `<p>Total Sum: ${person.sum}</p>`;
-    //                 // dataList.innerHTML = content;
-    //             } else {
-    //                 dataList.innerHTML = 'No payment data available.';
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error:', error);
-    //             alert('Error fetching data');
-    //         });
-    // });
-    document.getElementById('fetchData').addEventListener('click', function() {
-        // Fetch the person and their payments
-        fetch('http://localhost:8080/api/get')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok for getting person data');
-                }
-                return response.json();
-            })
-            .then(person => {
-                const dataList = document.getElementById('dataList');
-                if (person && person.paymentList && Array.isArray(person.paymentList)) {
-                    let content = `<h3>Payments for ${person.name}</h3><ul>`;
-                    person.paymentList.forEach(payment => {
-                        content += `<li>Description: ${payment.desc}, Value: ${payment.value}</li>`;
-                    });
-                    content += '</ul>';
-                    dataList.innerHTML = content;
-                } else {
-                    dataList.innerHTML = 'No payment data available.';
-                }
-                // After fetching and displaying person and payments, fetch the sum
-                return fetch('http://localhost:8080/api/sum');
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok for getting sum');
-                }
-                return response.json();
-            })
-            .then(sumData => {
-                // Assuming sumData is directly the sum or adjust based on your actual response structure
-                const sumDisplay = document.createElement('p');
-                sumDisplay.textContent = `Total Sum: ${sumData.sum}`;
-                document.getElementById('dataList').appendChild(sumDisplay);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-                alert('Error fetching data');
-            });
-    });
-
-
-</script>
+<script src="js/index.js"></script>
 </body>
 </html>

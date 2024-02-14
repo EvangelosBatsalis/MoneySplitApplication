@@ -1,35 +1,20 @@
 package gr.vbatsalis.MoneySplitApplication;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Payment {
-    private String desc;
+    private String description;
     private int value;
 
-    public Payment(String desc, int value) {
-        this.desc = desc;
-        this.value = value;
-    }
+//    @JsonIgnore
+    private LocalDateTime localDateTime = LocalDateTime.now();
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    @Override
-    public String toString() {
-        return "Payment{" +
-                "desc='" + desc + '\'' +
-                ", value=" + value +
-                '}';
-    }
 }

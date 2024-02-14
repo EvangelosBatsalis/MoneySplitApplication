@@ -1,8 +1,15 @@
 package gr.vbatsalis.MoneySplitApplication;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Person {
     private String name;
     private List<Payment> paymentList = new ArrayList<>();
@@ -11,9 +18,6 @@ public class Person {
     public Person(String name, Payment paymentList) {
         this.name = name;
         this.paymentList.add(paymentList);
-    }
-
-    public Person() {
     }
 
     public String getName() {
