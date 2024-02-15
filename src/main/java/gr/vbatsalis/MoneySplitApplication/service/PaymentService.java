@@ -14,8 +14,11 @@ public class PaymentService {
         this.paymentRepository = paymentRepository;
     }
 
-    public Payment saveOrUpdate(Payment payment){
-        return paymentRepository.save(payment);
+    public void saveOrUpdate(Payment payment){
+        System.out.println(payment.getDescription());
+        System.out.println(payment.getValue());
+        paymentRepository.save(payment);
+//        return paymentRepository.save(payment);
     }
 
 }

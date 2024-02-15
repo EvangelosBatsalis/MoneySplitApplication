@@ -26,7 +26,7 @@ class PersonController {
             return new ResponseEntity<>("User "+person.getFullName()+" already exists", HttpStatus.BAD_REQUEST);
         }else{
             Person newPersonSaved = personService.saveOrUpdate(person);
-        return new ResponseEntity<>("Saved Succesfull"+" id: "+newPersonSaved.getId(), HttpStatus.OK);
+        return new ResponseEntity<>("User Registered Successful"+" id: "+newPersonSaved.getId(), HttpStatus.OK);
     }
 
 //    @PostMapping("post")

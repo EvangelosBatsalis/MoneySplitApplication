@@ -23,4 +23,8 @@ public class PersonService {
         if(personRepository.findPersonByFullName(name) != null){return true;
         }else return false;
     }
+
+    public Person findByUserName(String name){
+        return personRepository.findPersonByFullName(name);
+    }
 }

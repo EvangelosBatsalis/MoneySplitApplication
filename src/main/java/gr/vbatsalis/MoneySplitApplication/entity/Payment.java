@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "money_split")
+@Table(name = "payment")
 public class Payment {
 
     @Id
@@ -28,8 +28,12 @@ public class Payment {
     @Column(name="value")
     private int value;
 
-//    @JsonIgnore
+    @JsonIgnore
     @Column(name = "local_date")
     private LocalDateTime localDateTime = LocalDateTime.now();
+
+    @JsonIgnore
+    @Column(name = "person_id")
+    private int person_id;
 
 }

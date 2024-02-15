@@ -1,5 +1,5 @@
 CREATE TABLE person (id int(10) NOT NULL AUTO_INCREMENT, full_name varchar(512) NOT NULL UNIQUE, PRIMARY KEY (id));
 DROP TABLE IF EXISTS person;
 
-CREATE TABLE payment (id int(10) NOT NULL AUTO_INCREMENT, person_id int(10) NOT NULL UNIQUE, description varchar(512) NOT NULL, value int(10) NOT NULL, local_date timestamp NULL, PRIMARY KEY (id));
+CREATE TABLE payment (id int(10) NOT NULL AUTO_INCREMENT, person_id int(10) NOT NULL, description varchar(512) NOT NULL, value int(10) NOT NULL, local_date timestamp NULL, PRIMARY KEY (id));
 DROP TABLE IF EXISTS payment;

@@ -25,7 +25,7 @@ public class Person {
     private String fullName;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_person")
+    @JoinColumn(name = "person_id")
     private List<Payment> paymentList = new ArrayList<>();
 
     public Person(String name, Payment paymentList) {
