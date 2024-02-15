@@ -21,18 +21,21 @@ class PersonController {
     }
 
     @PostMapping("newUserRegistration")
-    public int newUserRegistration(@RequestBody Person person){
-        Person newSavedPerson = personService.saveOrUpdate(person);
-        return newSavedPerson.getId();
+    public ResponseEntity<String> newUserRegistration(@RequestBody Person person){
+        if(personService.isExist(person.getFullName())){
+            return new ResponseEntity<>("User "+person.getFullName()+" already exists", HttpStatus.BAD_REQUEST);
+        }else{
+            Person newPersonSaved = personService.saveOrUpdate(person);
+        return new ResponseEntity<>("Saved Succesfull"+" id: "+newPersonSaved.getId(), HttpStatus.OK);
     }
 
-    @PostMapping("post")
-    public ResponseEntity<?> postHandler(@RequestBody Payment payment){
-        person.setName("vag");
-        person.setPaymentList(payment);
-        System.out.println(person);
-
-        return ResponseEntity.ok(HttpStatus.OK);
+//    @PostMapping("post")
+//    public ResponseEntity<?> postHandler( Payment payment){
+//        person.setFullName("vag");
+//        person.setPaymentList(payment);
+//        System.out.println(person);
+//
+//        return ResponseEntity.ok(HttpStatus.OK);
     }
 //    @GetMapping("sum")
 //    public int getSumHendler(){

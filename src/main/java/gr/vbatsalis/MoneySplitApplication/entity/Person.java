@@ -22,14 +22,14 @@ public class Person {
     private int id;
 
     @Column(name = "full_name")
-    private String name;
+    private String fullName;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_person")
     private List<Payment> paymentList = new ArrayList<>();
 
     public Person(String name, Payment paymentList) {
-        this.name = name;
+        this.fullName = name;
         this.paymentList.add(paymentList);
     }
 
@@ -45,7 +45,7 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "name='" + name + '\'' +
+                "name='" + fullName + '\'' +
                 ", paymentList=" + paymentList +
                 '}';
     }

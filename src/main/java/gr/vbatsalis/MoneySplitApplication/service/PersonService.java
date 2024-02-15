@@ -18,4 +18,9 @@ public class PersonService {
     public Person saveOrUpdate(Person person){
         return personRepository.save(person);
     }
+
+    public Boolean isExist(String name){
+        if(personRepository.findPersonByFullName(name) != null){return true;
+        }else return false;
+    }
 }
