@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.transform.sax.SAXResult;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("api")
 public class PaymentController {
@@ -35,6 +38,16 @@ public class PaymentController {
             return new ResponseEntity<>("User does not exist. Please register first", HttpStatus.BAD_GATEWAY);
         }
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("payment/get/{id}")
+    public ResponseEntity<String> getPaymentByIdHandler(@PathVariable int id){
+        if(!paymentService.isExist(id)){
+            return new ResponseEntity<>("Wrong id number",HttpStatus.BAD_GATEWAY);
+        }else{
+            Optional<Payment> payment = paymentService.findById(id);
+            return new ResponseEntity<>(payment, HttpStatus.OK);
+        }
     }
 
 

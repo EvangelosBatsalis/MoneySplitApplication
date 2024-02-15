@@ -33,11 +33,6 @@ public class Person {
         this.paymentList.add(paymentList);
     }
 
-
-    //public List<Payment> getPaymentList() {
-    //    return paymentList;
-    //}
-
     public void setPaymentList(Payment paymentList) {
         this.paymentList.add(paymentList);
     }

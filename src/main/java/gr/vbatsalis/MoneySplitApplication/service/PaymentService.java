@@ -4,6 +4,8 @@ import gr.vbatsalis.MoneySplitApplication.entity.Payment;
 import gr.vbatsalis.MoneySplitApplication.repos.PaymentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PaymentService {
 
@@ -21,4 +23,11 @@ public class PaymentService {
 //        return paymentRepository.save(payment);
     }
 
+    public Optional<Payment> findById(int id){
+        return paymentRepository.findById(id);
+    }
+
+    public Boolean isExist(int id){
+        return paymentRepository.existsById(id);
+    }
 }
