@@ -1,4 +1,4 @@
-package gr.vbatsalis.MoneySplitApplication;
+package gr.vbatsalis.MoneySplitApplication.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -29,6 +29,7 @@ public class Payment {
     private int value;
 
 //    @JsonIgnore
+    @Column(name = "local_date")
     private LocalDateTime localDateTime = LocalDateTime.now();
 
 }

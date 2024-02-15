@@ -1,5 +1,6 @@
-package gr.vbatsalis.MoneySplitApplication;
+package gr.vbatsalis.MoneySplitApplication.repos;
 
+import gr.vbatsalis.MoneySplitApplication.entity.Payment;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
