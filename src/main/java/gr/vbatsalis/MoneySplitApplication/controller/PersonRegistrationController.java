@@ -1,6 +1,5 @@
 package gr.vbatsalis.MoneySplitApplication.controller;
 
-import gr.vbatsalis.MoneySplitApplication.entity.Payment;
 import gr.vbatsalis.MoneySplitApplication.entity.Person;
 import gr.vbatsalis.MoneySplitApplication.service.PersonService;
 import org.springframework.http.HttpStatus;
@@ -9,14 +8,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api")
-class PersonController {
+class PersonRegistrationController {
 
     Person person = new Person();
 
     final
     PersonService personService;
 
-    public PersonController(PersonService personService) {
+    public PersonRegistrationController(PersonService personService) {
         this.personService = personService;
     }
 

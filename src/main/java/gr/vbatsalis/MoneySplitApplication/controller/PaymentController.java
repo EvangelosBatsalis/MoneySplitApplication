@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.transform.sax.SAXResult;
 import java.util.Optional;
 
 @RestController
@@ -40,15 +39,24 @@ public class PaymentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping("payment/get/{id}")
-    public ResponseEntity<String> getPaymentByIdHandler(@PathVariable int id){
-        if(!paymentService.isExist(id)){
-            return new ResponseEntity<>("Wrong id number",HttpStatus.BAD_GATEWAY);
-        }else{
-            Optional<Payment> payment = paymentService.findById(id);
-            return new ResponseEntity<>(payment, HttpStatus.OK);
+    @GetMapping("/get/{userName}")
+    public ResponseEntity<?> getPaymentByNameHandler(@PathVariable String userName) {
+        if (!personService.isExist(userName)) {
+            return new ResponseEntity<>("User Doesnot Exist",HttpStatus.BAD_GATEWAY);
+        } else {
+            return ResponseEntity.ok(personService.findByUserName(userName));
         }
     }
 
+    @GetMapping("/get/{userName}/{id}")
+    public ResponseEntity<?> getPaymentByNameAnIdHandler(@PathVariable String userName, @PathVariable int id) {
+//        if (!personService.isExist(userName)) {
+//            return new ResponseEntity<>("User Doesnot Exist",HttpStatus.BAD_GATEWAY);
+//        }else if(!paymentService.isExist(id)){
+//            return new ResponseEntity<>("Entry doesnot exist",HttpStatus.BAD_GATEWAY);
+//        }else {
+            return ResponseEntity.ok(paymentService.findByNameAndId(personService.findByUserName(userName).getId(), id));
+
+    }
 
 }

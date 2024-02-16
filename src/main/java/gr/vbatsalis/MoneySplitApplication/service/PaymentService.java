@@ -1,6 +1,7 @@
 package gr.vbatsalis.MoneySplitApplication.service;
 
 import gr.vbatsalis.MoneySplitApplication.entity.Payment;
+import gr.vbatsalis.MoneySplitApplication.entity.Person;
 import gr.vbatsalis.MoneySplitApplication.repos.PaymentRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +21,22 @@ public class PaymentService {
         System.out.println(payment.getDescription());
         System.out.println(payment.getValue());
         paymentRepository.save(payment);
-//        return paymentRepository.save(payment);
     }
 
     public Optional<Payment> findById(int id){
         return paymentRepository.findById(id);
     }
 
+    public Boolean isPaymentExists(int id){
+        return paymentRepository.existsById(id);
+    }
+
     public Boolean isExist(int id){
         return paymentRepository.existsById(id);
     }
+
+    public Optional<Person> findByNameAndId(int person_id, int id){
+        return paymentRepository.findByPerson_idAndId(person_id, id);
+    }
+
 }
