@@ -27,4 +27,10 @@ public class PersonService {
     public Person findByUserName(String name){
         return personRepository.findPersonByFullName(name);
     }
+
+    public Person findByUserNameAndId(String name, int id){
+        return personRepository.findPersonByFullNameAndAndId(name, id);
+    }
+
+
 }

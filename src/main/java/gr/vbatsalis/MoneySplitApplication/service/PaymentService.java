@@ -35,8 +35,6 @@ public class PaymentService {
         return paymentRepository.existsById(id);
     }
 
-    public Optional<Person> findByNameAndId(int person_id, int id){
-        return paymentRepository.findByPerson_idAndId(person_id, id);
-    }
+
 
 }

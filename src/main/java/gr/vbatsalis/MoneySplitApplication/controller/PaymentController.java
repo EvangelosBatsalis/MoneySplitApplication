@@ -9,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("api")
 public class PaymentController {
@@ -48,15 +46,17 @@ public class PaymentController {
         }
     }
 
-    @GetMapping("/get/{userName}/{id}")
-    public ResponseEntity<?> getPaymentByNameAnIdHandler(@PathVariable String userName, @PathVariable int id) {
+    @GetMapping("get/{userName}/{id}")
+    public Person getPaymentByNameAnIdHandler(@PathVariable String userName, @PathVariable int id) {
 //        if (!personService.isExist(userName)) {
 //            return new ResponseEntity<>("User Doesnot Exist",HttpStatus.BAD_GATEWAY);
 //        }else if(!paymentService.isExist(id)){
 //            return new ResponseEntity<>("Entry doesnot exist",HttpStatus.BAD_GATEWAY);
 //        }else {
-            return ResponseEntity.ok(paymentService.findByNameAndId(personService.findByUserName(userName).getId(), id));
-
+//            return ResponseEntity.ok(personService.findByUserNameAndId(userName, id));
+        Person newPerson = personService.findByUserNameAndId(userName,id);
+        System.out.println(newPerson);
+        return newPerson;
     }
 
 }

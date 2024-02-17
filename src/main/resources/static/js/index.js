@@ -1,74 +1,36 @@
-document.getElementById('addDataForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+document.getElementById("submitButton").addEventListener("click", function() {
+    const username = document.getElementById("usernameMenu").value;
+    const value = document.getElementById("valueInput").value;
+    const description = document.getElementById("descriptionInput").value;
 
-    const formData = {
-        desc: document.getElementById('desc').value,
-        value: document.getElementById('value').value
-    };
-
-    fetch('http://localhost:8080/api/post', {
+    // Example of how you could send a POST request to your Spring Boot API
+    fetch('http://localhost:8080/api/payment/new/'+username,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ value, description }),
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
-            alert('Data posted successfully!');
-            document.getElementById('addDataForm').reset(); // Reset form after submission
         })
         .catch((error) => {
             console.error('Error:', error);
-            alert('Error posting data');
         });
 });
 
+document.getElementById("displayButton").addEventListener("click", function() {
+    // Dummy function to display imports and sum division by two
+    // Replace with actual API call or logic to fetch and display data
+    const displayArea = document.getElementById("listDisplay");
+    displayArea.innerHTML = "<p>Imported data and sum division by two would be displayed here.</p>";
+    // Add logic to edit values next to each list item
+});
 
-document.getElementById('fetchData').addEventListener('click', function() {
-    // Fetch the person and their payments
-    fetch('http://localhost:8080/api/get')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok for getting person data');
-            }
-            return response.json();
-        })
-        .then(person => {
-            const dataList = document.getElementById('dataList');
-            if (person && person.paymentList && Array.isArray(person.paymentList)) {
-                let content = `<h3>Payments for ${person.name}</h3><ul>`;
-                person.paymentList.forEach(payment => {
-                    content += `<li>Description: ${payment.desc}, Value: ${payment.value}</li>`;
-                });
-                content += '</ul>';
-                dataList.innerHTML = content;
-            } else {
-                dataList.innerHTML = 'No payment data available.';
-            }
-            // After fetching and displaying person and payments, fetch the sum
-            return fetch('http://localhost:8080/api/sum');
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok for getting sum');
-            }
-            return response.json();
-        })
-        .then(sumData => {
-            // Assuming sumData is directly the sum or adjust based on your actual response structure
-            const sumDisplay = document.createElement('p');
-            sumDisplay.textContent = `Total Sum: ${sumData.sum}`;
-            document.getElementById('dataList').appendChild(sumDisplay);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            alert('Error fetching data');
-        });
+document.getElementById("eraseButton").addEventListener("click", function() {
+    // Clear all inputs and the display area
+    document.getElementById("valueInput").value = '';
+    document.getElementById("descriptionInput").value = '';
+    document.getElementById("listDisplay").innerHTML = '';
 });

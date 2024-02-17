@@ -1,28 +1,53 @@
-body {
+body, html {
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
+}
+
+header, footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background-color: #111;
+}
+
+.body {
     margin: 20px;
 }
-.form-group, .data-list {
-    margin-bottom: 10px;
-}
-label {
-    display: block;
-    margin-bottom: 5px;
-}
-input[type="text"], input[type="number"], .data-list {
-    width: 100%;
-    padding: 8px;
-    margin: 4px 0;
-    box-sizing: border-box;
-}
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
+
+input[type=text], select, button {
     margin: 10px 0;
-    border: none;
+    padding: 10px;
+}
+
+button {
     cursor: pointer;
 }
-button:hover {
-    background-color: #45a049;
+
+#listDisplay {
+    margin-top: 20px;
 }

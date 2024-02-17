@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="styles/index.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add and Fetch Data</title>
+    <title>Example Page</title>
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-<h2>Add Data Form</h2>
-<form id="addDataForm">
-    <div class="form-group">
-        <label for="desc">Description:</label>
-        <input type="text" id="desc" name="desc" required>
-    </div>
-    <div class="form-group">
-        <label for="value">Value:</label>
-        <input type="number" id="value" name="value" required>
-    </div>
-    <button type="submit">Post Data</button>
-</form>
-<button id="fetchData">Fetch Data</button>
-<div class="data-list" id="dataList"></div>
-
+<header>Header</header>
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+</nav>
+<div class="body">
+    <select id="usernameMenu">
+        <!-- Option values will be added here -->
+        <option value="username1">vag</option>
+        <option value="username2">ele</option>
+    </select>
+    <input type="text" id="valueInput" placeholder="Value">
+    <input type="text" id="descriptionInput" placeholder="Description">
+    <button id="submitButton">Submit</button>
+    <button id="displayButton">Display Imports</button>
+    <button id="eraseButton">Erase Everything</button>
+    <div id="listDisplay"></div>
+</div>
+<footer>Footer</footer>
 <script src="js/index.js"></script>
 </body>
 </html>

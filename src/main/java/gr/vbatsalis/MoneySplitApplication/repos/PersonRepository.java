@@ -9,4 +9,6 @@ public interface PersonRepository extends CrudRepository<Person,Integer> {
     Person findPersonById(Integer id);
 
     Person findPersonByFullName(String name);
+
+    Person findPersonByFullNameAndAndId(String name, int id);
 }

@@ -10,6 +10,5 @@ import java.util.Optional;
 @Repository
 public interface PaymentRepository extends CrudRepository<Payment, Integer> {
 
-    Optional<Person> findByPerson_idAndId(int person_id, int id);
 
 }
