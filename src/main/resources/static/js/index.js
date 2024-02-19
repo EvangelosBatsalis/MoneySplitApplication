@@ -4,7 +4,7 @@ document.getElementById("submitButton").addEventListener("click", function() {
     const description = document.getElementById("descriptionInput").value;
 
     // Example of how you could send a POST request to your Spring Boot API
-    fetch('http://localhost:8080/api/payment/new/'+username,{
+    fetch('api/payment/new/'+username,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ document.getElementById("submitButton").addEventListener("click", function() {
 document.getElementById("displayButton").addEventListener("click", function() {
     const username = document.getElementById("usernameMenu").value;
 
-    fetch(`http://localhost:8080/api/get/${username}`, {
+    fetch(`api/get/${username}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function editItem(itemId, currentValue, currentDescription) {
         const newDescription = descriptionInput.value;
 
         // Send a request to update the item via API
-        fetch(`http://localhost:8080/api/save/${itemId}`, {
+        fetch(`api/save/${itemId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -127,7 +127,7 @@ function editItem(itemId, currentValue, currentDescription) {
     deleteButton.textContent = "Delete";
     deleteButton.addEventListener("click", function() {
         // Send a request to delete the item via API
-        fetch(`http://localhost:8080/api/delete/${itemId}`, {
+        fetch(`api/delete/${itemId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -158,7 +158,7 @@ function editItem(itemId, currentValue, currentDescription) {
 function displayData() {
     const username = document.getElementById("usernameMenu").value;
 
-    fetch(`http://localhost:8080/api/get/${username}`, {
+    fetch(`api/get/${username}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
