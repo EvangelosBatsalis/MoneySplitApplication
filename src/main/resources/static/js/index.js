@@ -21,16 +21,50 @@ document.getElementById("submitButton").addEventListener("click", function() {
 });
 
 document.getElementById("displayButton").addEventListener("click", function() {
-    // Dummy function to display imports and sum division by two
-    // Replace with actual API call or logic to fetch and display data
-    const displayArea = document.getElementById("listDisplay");
-    displayArea.innerHTML = "<p>Imported data and sum division by two would be displayed here.</p>";
-    // Add logic to edit values next to each list item
+    const username = document.getElementById("usernameMenu").value;
+
+    fetch(`http://localhost:8080/api/get/${username}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Received data:', data); // Debug log to inspect the structure of the data
+
+            // Check if the paymentList property exists and is an array
+            if (!data.paymentList || !Array.isArray(data.paymentList)) {
+                console.error('paymentList property is missing or not an array:', data);
+                return;
+            }
+
+            const displayArea = document.getElementById("listDisplay");
+            let totalSum = 0;
+            let listHTML = '<ul>';
+
+            data.paymentList.forEach(item => {
+                let value = parseFloat(item.value);
+                totalSum += value;
+                listHTML += `<li>${value} - ${item.description} <button onclick="editItem('${item.id}')">Edit</button></li>`;
+            });
+
+            listHTML += '</ul>';
+            listHTML += `<p>Sum divided by two: ${(totalSum / 2).toFixed(2)}</p>`;
+            displayArea.innerHTML = listHTML;
+        })
+        .catch((error) => {
+            console.error('Fetch error:', error);
+            document.getElementById("listDisplay").innerHTML = "<p>Error fetching data. Please check the console for more information.</p>";
+        });
 });
 
-document.getElementById("eraseButton").addEventListener("click", function() {
-    // Clear all inputs and the display area
-    document.getElementById("valueInput").value = '';
-    document.getElementById("descriptionInput").value = '';
-    document.getElementById("listDisplay").innerHTML = '';
-});
+function editItem(itemId) {
+    console.log(`Editing item ${itemId}`);
+    // Implement your edit functionality here
+}
